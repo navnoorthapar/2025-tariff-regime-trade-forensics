@@ -136,6 +136,21 @@
   .body-text { font-size: 13px; line-height: 1.7; color: #333; margin-bottom: 16px; }
   .body-text-sm { font-size: 13px; line-height: 1.7; color: #333; margin-bottom: 12px; }
 
+  /* Paywall */
+  .paywall-gate { position: relative; }
+  .paywall-gate.locked .gated-content { max-height: 300px; overflow: hidden; filter: blur(4px); pointer-events: none; user-select: none; }
+  .paywall-gate.locked .gated-content::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 300px; background: linear-gradient(transparent, #f8f7f2); pointer-events: none; }
+  .paywall-overlay { display: none; }
+  .paywall-gate.locked .paywall-overlay { display: block; text-align: center; padding: 48px 24px 64px; }
+  .paywall-box { max-width: 520px; margin: 0 auto; background: #1a1a2e; border: 2px solid #c9a84c; border-radius: 8px; padding: 36px 32px; }
+  .paywall-lock { font-size: 36px; margin-bottom: 12px; }
+  .paywall-title { color: #fff; font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+  .paywall-desc { color: #b0b8c8; font-size: 13px; line-height: 1.6; margin: 0 0 20px; }
+  .paywall-btn { display: inline-block; background: #c9a84c; color: #1a1a2e; font-size: 14px; font-weight: 700; padding: 12px 32px; border-radius: 4px; text-decoration: none; font-family: monospace; letter-spacing: 0.05em; transition: background 0.2s; }
+  .paywall-btn:hover { background: #d4b85c; }
+  .paywall-perks { color: #9aabb8; font-size: 11px; margin-top: 14px; font-family: monospace; }
+  .paywall-perks span { color: #c9a84c; }
+
   @media print {
     body { background: #fff; }
     .cover { break-after: avoid; }
@@ -177,6 +192,9 @@
     <div class="bottom-line-item"><span class="bottom-line-num">6.</span><p class="bottom-line-text">A secondary market for IEEPA tariff refund claims — priced at 20 cents on the dollar pre-ruling — is the most structurally elegant and least-reported alpha source of the cycle. Post-Supreme Court ruling (6–3, Feb 20, 2026), claims repriced to 40 cents. A 2× return on a binary legal bet, zero market correlation.</p></div>
     <div class="bottom-line-item"><span class="bottom-line-num">7.</span><p class="bottom-line-text">Pod shop drawdown limits (2–3%) structurally prevented Citadel Wellington and Millennium from holding the correct tariff positioning through Q1 2025 drawdowns. Structure ate strategy. Both trailed the S&P 500.</p></div>
   </div>
+
+  <div class="paywall-gate locked" id="paywallGate">
+  <div class="gated-content" style="position:relative;">
 
   <!-- SECTION 1: REGIME -->
   <div class="section-header">
@@ -576,6 +594,29 @@
     <strong>DISCLAIMER:</strong> This note is for informational and educational purposes only. It does not constitute investment advice, a solicitation, or a recommendation to buy or sell any security. All performance figures are sourced from named third-party publications and fund documents as cited. Past performance does not predict future results. The author holds no positions in any securities mentioned. Confirmed vs. inferred labels reflect the author's judgment about source quality; readers should verify primary sources independently.
   </div>
 
+  </div><!-- end gated-content -->
+
+  <div class="paywall-overlay">
+    <div class="paywall-box">
+      <div class="paywall-lock">🔒</div>
+      <h3 class="paywall-title">Full Analysis — Patreon Members Only</h3>
+      <p class="paywall-desc">You've seen the key takeaways. The full report includes 10 exhibits covering all 14 funds, trade-by-trade forensics, performance scorecards, extractable lessons, and complete primary source documentation.</p>
+      <a class="paywall-btn" href="https://www.patreon.com/c/NavnoorBawa" target="_blank">SUBSCRIBE ON PATREON →</a>
+      <p class="paywall-perks"><span>Quant Research Club</span> · $5/month · Full access to all research</p>
+    </div>
+  </div>
+
+  </div><!-- end paywall-gate -->
+
 </div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('access') === 'patron') {
+    document.getElementById('paywallGate').classList.remove('locked');
+  }
+})();
+</script>
 </body>
 </html>
